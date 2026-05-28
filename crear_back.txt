@@ -1,0 +1,211 @@
+Quiero que construyas el backend completo para un sistema CRM con asistente de IA utilizando Python y FastAPI.
+
+Stack obligatorio:
+
+* Python 3.12
+* FastAPI
+* SQLAlchemy
+* PostgreSQL
+* Alembic
+* Pydantic v2
+* Docker
+* Pytest
+
+Objetivo:
+Construir un backend profesional, limpio, escalable y listo para producción para un mini CRM comercial con integración de IA.
+
+Arquitectura requerida:
+Usa arquitectura limpia y separación de responsabilidades.
+
+Estructura esperada:
+
+backend/
+│
+├── app/
+│   ├── api/
+│   │   ├── routes/
+│   │   └── dependencies/
+│   │
+│   ├── core/
+│   │   ├── config.py
+│   │   ├── security.py
+│   │   └── exceptions.py
+│   │
+│   ├── database/
+│   │   ├── connection.py
+│   │   ├── models/
+│   │   ├── repositories/
+│   │   ├── migrations/
+│   │   └── seed/
+│   │
+│   ├── schemas/
+│   │
+│   ├── services/
+│   │
+│   ├── ai/
+│   │   ├── providers/
+│   │   ├── prompts/
+│   │   ├── tools/
+│   │   └── services/
+│   │
+│   ├── middleware/
+│   │
+│   └── main.py
+│
+├── tests/
+│
+├── requirements.txt
+│
+├── Dockerfile
+│
+└── .env.example
+
+Requisitos generales:
+
+* Código limpio y tipado.
+* Uso correcto de async/await cuando corresponda.
+* Variables de entorno.
+* Validación de datos.
+* Manejo global de errores.
+* Logging básico.
+* Health check endpoint.
+* Swagger/OpenAPI configurado.
+* CORS configurado.
+* Soft delete.
+* Repository pattern.
+* Service layer.
+* Código desacoplado.
+* Preparado para integración futura con frontend Next.js.
+
+Base de datos:
+Usar PostgreSQL.
+
+Crear modelo Opportunity con estos campos:
+
+* id (UUID)
+* company_name
+* contact_name
+* contact_email
+* opportunity_name
+* description
+* estimated_value
+* currency
+* stage
+* priority
+* probability
+* owner
+* next_follow_up_date
+* last_interaction_summary
+* ai_recommendation
+* created_at
+* updated_at
+* is_active
+
+Reglas:
+
+* UUID automático.
+* created_at y updated_at automáticos.
+* Soft delete con is_active.
+* stage debe ser enum.
+* priority debe ser enum.
+* probability debe aceptar valores entre 0 y 100.
+
+Estados permitidos:
+
+* Lead nuevo
+* Contactado
+* Diagnóstico
+* Propuesta enviada
+* Negociación
+* Ganado
+* Perdido
+
+Prioridades permitidas:
+
+* Baja
+* Media
+* Alta
+* Crítica
+
+Endpoints requeridos:
+
+GET /health
+
+GET /api/v1/opportunities
+
+* paginación
+* filtros por:
+
+  * stage
+  * priority
+  * owner
+
+GET /api/v1/opportunities/{id}
+
+POST /api/v1/opportunities
+
+PUT /api/v1/opportunities/{id}
+
+DELETE /api/v1/opportunities/{id}
+
+* debe ser soft delete
+
+Requisitos API:
+
+* Respuestas consistentes.
+* HTTP status codes correctos.
+* Manejo global de excepciones.
+* Validaciones robustas.
+* Documentación automática OpenAPI.
+
+Seeds:
+Crear script de carga inicial con al menos 5 oportunidades comerciales reales utilizando los datos entregados en el desafío.
+
+Alembic:
+
+* Configurar migraciones.
+* Crear migración inicial.
+
+Docker:
+Crear:
+
+* Dockerfile
+* docker-compose compatible
+* configuración para PostgreSQL
+
+Testing:
+Usar Pytest.
+
+Crear tests mínimos para:
+
+* crear oportunidad
+* listar oportunidades
+* actualizar oportunidad
+* eliminar oportunidad
+
+IA:
+Preparar estructura para integración de OpenAI.
+
+Crear endpoint:
+POST /api/v1/ai/chat
+
+El endpoint debe:
+
+* recibir una pregunta
+* consultar datos reales del CRM
+* responder usando información persistida
+* evitar alucinaciones
+* rechazar preguntas fuera del alcance del CRM
+
+Implementar arquitectura preparada para:
+
+* tool calling
+* prompts versionados
+* memoria conversacional
+* logs de interacción
+
+NO usar lógica mockeada.
+NO dejar TODOs vacíos.
+NO generar pseudocódigo.
+
+Quiero código funcional y ejecutable.
